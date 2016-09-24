@@ -1,42 +1,9 @@
-const fetch = require('node-fetch');
+
 
 module.exports = {
-  _fetchSubreddit,
   domainReducer,
   sortBy
 };
-
-/**
- * Internal method for recursively fetching paged subreddit JSON feeds.
- *
- * @private
- * @param  {String}   subreddit Name of the subreddit to fetch.
- * @param  {Number}   pages     Number of remaining pages to recursively fetch.
- * @param  {Function} cb        Callback method to invoke when all pages have
- *                              been scraped.
- * @param  {Array}    data      Data object to pass between requests.
- * @param  {String}   after     Reddit token for the next Reddit feed page.
- * @return {null}               Calls a callback.
- */
-function _fetchSubreddit(subreddit, pages, cb, data=[], after=undefined) {
-  let url = `https://www.reddit.com/r/${subreddit}/.json?count=25`;
-  if (after) {
-    url += `&after=${after}`;
-  }
-  fetch(url)
-    .then((res) => res.json())
-    .then((res) => {
-      data.push(res.data.children.map((item) => item.data))
-      if (pages > 1) {
-        // RECURSION ALERT!
-        // Decrease the remaining page count by 1 and fetch the next page.
-        _fetchSubreddit(subreddit, pages - 1, cb, data, res.data.after);
-      } else {
-        cb(null, data.reduce((prev, curr) => prev.concat(curr), []));
-      }
-    })
-    .catch((err) => cb(err));
-}
 
 /**
  * Converts the Reddit responses into an Array of domains, then consolidates the

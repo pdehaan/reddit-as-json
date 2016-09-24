@@ -1,5 +1,6 @@
 {
   "name": "reddit-as-json",
+  "description": "Fetch paged Subreddit JSON feeds.",
   "version": "1.0.0",
   "author": "Peter deHaan <peter@deseloper.com> (https://about.me/peterdehaan)",
   "bugs": {
@@ -8,14 +9,14 @@
   "dependencies": {
     "node-fetch": "1.6.2"
   },
+  "devDependencies": {},
   "homepage": "https://github.com/pdehaan/reddit-as-json#readme",
-  "keywords": [],
+  "keywords": [
+    "reddit"
+  ],
   "license": "WTFPL",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pdehaan/reddit-as-json.git"
-  },
+  "repository": "pdehaan/reddit-as-json",
   "scripts": {
     "test": "node test"
   }
