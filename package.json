@@ -1,0 +1,22 @@
+{
+  "name": "reddit-as-json",
+  "version": "1.0.0",
+  "author": "Peter deHaan <peter@deseloper.com> (https://about.me/peterdehaan)",
+  "bugs": {
+    "url": "https://github.com/pdehaan/reddit-as-json/issues"
+  },
+  "dependencies": {
+    "node-fetch": "1.6.2"
+  },
+  "homepage": "https://github.com/pdehaan/reddit-as-json#readme",
+  "keywords": [],
+  "license": "WTFPL",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdehaan/reddit-as-json.git"
+  },
+  "scripts": {
+    "test": "node test"
+  }
+}
