@@ -21,7 +21,18 @@ fetchSubreddit('videos', 3)
   .catch((err) => console.error(err));
 ```
 
-### Output:
+## API:
+
+### `fetchSubreddit(subreddit:String, pages:Number):Promise {...}`
+
+Fetch the first `pages` number of pages for the specified `subreddit`. Returns a
+promise which resolves with the concatenated subreddit post data.
+
+### `function domainReducer(res:Object):Object {...}`
+
+Groups the concatenated subreddit post data by domain, and sorts by frequency.
+
+#### Output:
 
 ```js
 { subreddit: 'videos',
@@ -38,13 +49,22 @@ fetchSubreddit('videos', 3)
      { name: 'm.youtube.com', value: 1 } ] }
 ```
 
-## API:
+### `function urlReducer(res:Array):Array {...}`
 
-### `fetchSubreddit(subreddit:String, pages:Number):Promise {...}`
+Converts the Reddit responses into an Array of URLs, then sorts the URLs
+alphabetically.
 
-Fetch the first `pages` number of pages for the specified `subreddit`. Returns a
-promise which resolves with the concatenated subreddit post data.
+#### Output:
 
-### `function domainReducer(res:Object):Object {...}`
-
-Groups the concatenated subreddit post data by domain, and sorts by frequency.
+```js
+{ subreddit: 'videos',
+  pages: 3,
+  data:
+   [ 'http://youtu.be/19LrAw1sxhI',
+     'http://youtu.be/GLUYnMPaiJw',
+     'https://m.youtube.com/watch?v=h1VbD5hq1Bs',
+     'https://streamable.com/79t3',
+     ...
+     'https://youtu.be/zwSzbPdM-YQ',
+     'https://youtube.com/watch?v=nG5gEzymh5c' ] }
+```

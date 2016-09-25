@@ -1,5 +1,6 @@
 module.exports = {
   domainReducer,
+  urlReducer,
   sortBy
 };
 
@@ -13,7 +14,8 @@ module.exports = {
  *                      Array of domains.
  */
 function domainReducer(res) {
-  const domains = res.data.map(({domain}) => domain)
+  const domains = res.data
+    .map(({domain}) => domain)
     .reduce((prev, curr) => {
       prev[curr] = prev[curr] || 0;
       prev[curr] += 1;
@@ -25,7 +27,7 @@ function domainReducer(res) {
 }
 
 /**
- * Transforms and sorts an object and returns it as a sorted Array.
+ * Transforms and sorts an object and returns it as a sorted Array of domains.
  *
  * @param  {Object} domains Object of domain:count values.
  * @return {Array}          Sorted array of {name:domain, value:count} values,
@@ -39,7 +41,34 @@ function domainSorter(domains) {
 }
 
 /**
- * Sort an array by key.
+ * Converts the Reddit responses into an Array of URLs, then sorts the URLs
+ * alphabetically.
+ *
+ * @param  {Object} res An Object containing the subreddit name, and Array of
+ *                      results from Reddit.
+ * @return {Object}     An Object containing the subreddit name, and sorted
+ *                      Array of URLs.
+ */
+function urlReducer(res) {
+  res.data = urlSorter(res.data);
+  return res;
+}
+
+/**
+ * Transforms and sorts an Array of items and returns it as a sorted Array of
+ * URLs.
+ *
+ * @param  {Array} items Array of Reddit links.
+ * @return {Array}       Sorted array of Reddit link URLs.
+ */
+function urlSorter(items) {
+  return items
+    .map(({url}) => url)
+    .sort();
+}
+
+/**
+ * Sort an array by the specified key.
  *
  * @param  {String} key The key to sort by.
  * @return {Array}      Sorted array.

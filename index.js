@@ -1,10 +1,11 @@
 const fetch = require('node-fetch');
 
-const { domainReducer } = require('./lib');
+const { domainReducer, urlReducer } = require('./lib');
 
 module.exports = {
   fetchSubreddit,
-  domainReducer
+  domainReducer,
+  urlReducer
 };
 
 /**
