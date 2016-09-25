@@ -1,0 +1,93 @@
+/* eslint-disable no-console */
+
+const { fetchSubreddit, urlReducer } = require('../index');
+
+// Fetch the first 3 pages of /r/videos JSON feed, and group by url.
+fetchSubreddit('videos', 3)
+  .then((res) => urlReducer(res))
+  // .then((data) => JSON.stringify(data, null, 2))
+  .then((data) => console.log(data))
+  .catch((err) => console.error(err));
+
+/** OUTPUT:
+
+  { subreddit: 'videos',
+    pages: 3,
+    data:
+     [ 'http://youtu.be/19LrAw1sxhI',
+       'http://youtu.be/GLUYnMPaiJw',
+       'http://youtu.be/MX8SLfNJQ6k',
+       'https://m.youtube.com/watch?v=h1VbD5hq1Bs',
+       'https://streamable.com/79t3',
+       'https://streamable.com/u3q7',
+       'https://streamable.com/yiyd',
+       'https://twitter.com/BleacherReport/status/779312054377275392',
+       'https://vid.me/GDm0',
+       'https://vimeo.com/184025749',
+       'https://www.youtube.com/watch?v=-qyws7f6ql8',
+       'https://www.youtube.com/watch?v=0bZwsS0imsM',
+       'https://www.youtube.com/watch?v=0iDAkEpCmBs',
+       'https://www.youtube.com/watch?v=2-S2o3tZltU',
+       'https://www.youtube.com/watch?v=33u360mGsss',
+       'https://www.youtube.com/watch?v=48AoEwKPSbk',
+       'https://www.youtube.com/watch?v=5BVkohboCTQ',
+       'https://www.youtube.com/watch?v=6q36pnzcw70',
+       'https://www.youtube.com/watch?v=90bkLu_bmfw',
+       'https://www.youtube.com/watch?v=9A-DCWlLfOQ',
+       'https://www.youtube.com/watch?v=9r7_YTMbnOQ',
+       'https://www.youtube.com/watch?v=BTfognlOgKI&amp;feature=youtu.be',
+       'https://www.youtube.com/watch?v=FQykH3XHtqQ',
+       'https://www.youtube.com/watch?v=Fuzh6RT0wx8',
+       'https://www.youtube.com/watch?v=FveFmShXoRE',
+       'https://www.youtube.com/watch?v=GnxkO6Z_Q74',
+       'https://www.youtube.com/watch?v=KLvjSg9iFfw',
+       'https://www.youtube.com/watch?v=KbgvSi35n6o',
+       'https://www.youtube.com/watch?v=LFiqxR7s76Y',
+       'https://www.youtube.com/watch?v=NgKhNBb2kMM',
+       'https://www.youtube.com/watch?v=Nw-n1-NXLgU',
+       'https://www.youtube.com/watch?v=O4k20BV6GwU',
+       'https://www.youtube.com/watch?v=OAYhcZsTDxk',
+       'https://www.youtube.com/watch?v=PDgP4hN4OA4',
+       'https://www.youtube.com/watch?v=PJnn-wMPU9w',
+       'https://www.youtube.com/watch?v=SMTLBhoCM8k',
+       'https://www.youtube.com/watch?v=TuJqUvBj4rE',
+       'https://www.youtube.com/watch?v=WVZ3ZcorTF0',
+       'https://www.youtube.com/watch?v=bitQB9wodGs',
+       'https://www.youtube.com/watch?v=cS_Fbueh7F4',
+       'https://www.youtube.com/watch?v=fqOW84ZTL7k',
+       'https://www.youtube.com/watch?v=fvB3Uvdggxs',
+       'https://www.youtube.com/watch?v=gNSfhSXtvSk',
+       'https://www.youtube.com/watch?v=hXlzci1rKNM',
+       'https://www.youtube.com/watch?v=ikDOM2k1jkwhttps://www.youtube.com/watch?v=ikDOM2k1jkw&amp;feature=share',
+       'https://www.youtube.com/watch?v=jXw9jGTdBy0',
+       'https://www.youtube.com/watch?v=lLA7dQ-uxR0',
+       'https://www.youtube.com/watch?v=mIAYxWCXF8A&amp;index=11&amp;',
+       'https://www.youtube.com/watch?v=ntQ7qGilqZE',
+       'https://www.youtube.com/watch?v=pa3xOakbGTo',
+       'https://www.youtube.com/watch?v=r5capbhKlVA',
+       'https://www.youtube.com/watch?v=uZ1BDrREvRg',
+       'https://www.youtube.com/watch?v=xVXVTfPfrOQ',
+       'https://www.youtube.com/watch?v=zLMeDUBKmBs',
+       'https://www.youtube.com/watch?v=zxKtH5OnxI4',
+       'https://www.youtube.com/watch?v=zxyOdltHfb0&amp;ab_channel=Hyun%27sDojo',
+       'https://youtu.be/3EHjlFL9STY',
+       'https://youtu.be/CAm_lX8zUNQ',
+       'https://youtu.be/EtrDWEqH2lI?t=783',
+       'https://youtu.be/GjOBTstnW20',
+       'https://youtu.be/GrETf-GjeXs',
+       'https://youtu.be/J7vreUPCl9c',
+       'https://youtu.be/JgQVj4iMm8Y',
+       'https://youtu.be/Kth0UOU5a_M',
+       'https://youtu.be/QxlVHQF1BQ4',
+       'https://youtu.be/Ra6I6svXQPg',
+       'https://youtu.be/V7eCb6tKSB4?t=4s',
+       'https://youtu.be/egcXvqiho4w',
+       'https://youtu.be/irb335ThCdo',
+       'https://youtu.be/oMdyWw9ovpg',
+       'https://youtu.be/pGuopzED0B8',
+       'https://youtu.be/tlBaUgHuCkk',
+       'https://youtu.be/vFhrc32kF6E',
+       'https://youtu.be/zwSzbPdM-YQ',
+       'https://youtube.com/watch?v=nG5gEzymh5c' ] }
+
+ */
