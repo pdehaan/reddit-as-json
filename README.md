@@ -13,10 +13,10 @@ $ npm i pdehaan/reddit-as-json -S
 ```js
 const { fetchSubreddit, domainReducer } = require('reddit-as-json');
 
-// Fetch the first 3 pages of /r/videos JSON feed, and group by domain.
+// Fetch the first 3 pages of /r/videos JSON feed.
 fetchSubreddit('videos', 3)
+  // Group by domain.
   .then((res) => domainReducer(res))
-  // .then((data) => JSON.stringify(data, null, 2))
   .then((data) => console.log(data))
   .catch((err) => console.error(err));
 ```
@@ -28,9 +28,21 @@ fetchSubreddit('videos', 3)
 Fetch the first `pages` number of pages for the specified `subreddit`. Returns a
 promise which resolves with the concatenated subreddit post data.
 
-### `function domainReducer(res:Object):Object {...}`
+### `domainReducer(res:Object):Object {...}`
 
 Groups the concatenated subreddit post data by domain, and sorts by frequency.
+
+#### Usage:
+
+```js
+const { fetchSubreddit, domainReducer } = require('reddit-as-json');
+
+// Fetch the first 3 pages of /r/videos JSON feed, and group by domain.
+fetchSubreddit('videos', 3)
+  .then((res) => domainReducer(res))
+  .then((data) => console.log(data))
+  .catch((err) => console.error(err));
+```
 
 #### Output:
 
@@ -49,10 +61,22 @@ Groups the concatenated subreddit post data by domain, and sorts by frequency.
      { name: 'm.youtube.com', value: 1 } ] }
 ```
 
-### `function urlReducer(res:Array):Array {...}`
+### `urlReducer(res:Array):Array {...}`
 
 Converts the Reddit responses into an Array of URLs, then sorts the URLs
 alphabetically.
+
+#### Usage:
+
+```js
+const { fetchSubreddit, urlReducer } = require('reddit-as-json');
+
+// Fetch the first 3 pages of /r/videos JSON feed, and group by URL.
+fetchSubreddit('videos', 3)
+  .then((res) => urlReducer(res))
+  .then((data) => console.log(data))
+  .catch((err) => console.error(err));
+```
 
 #### Output:
 
