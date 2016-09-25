@@ -1,5 +1,3 @@
-
-
 module.exports = {
   domainReducer,
   sortBy
